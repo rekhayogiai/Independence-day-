@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Independence Day Quiz</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9933 0%, #ffffff 40%, #138808 80%, #000080 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #222;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #000080;
+  }
+  a.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    border: 2px solid white;
+    padding: 10px 18px;
+    border-radius: 30px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  a.back-link:hover {
+    background-color: #138808;
+    color: white;
+  }
+  .quiz-container {
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.95);
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .question {
+    font-weight: 600;
+    margin: 15px 0 8px;
+  }
+  .options label {
+    display: block;
+    background: #f1f1f1;
+    margin: 6px 0;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .options input {
+    margin-right: 8px;
+  }
+  .options label:hover {
+    background: #e0e0e0;
+  }
+  label.correct {
+    background: #c8e6c9 !important;
+  }
+  label.wrong {
+    background: #ffcdd2 !important;
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px 16px;
+    background-color: #000080;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+  }
+  button:hover {
+    background-color: #ff9933;
+    color: #000;
+  }
+  .result {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>🇮🇳 Independence Day & India Quiz</h1>
+<div class="quiz-container" id="quiz"></div>
+<button id="nextBtn">Next</button>
+<div class="result" id="result"></div>
+
+  <a href="index.html" class="back-link">&larr; Back to Home</a>
+</div>
+<script>
+const quizData = [
+  { q: "भारत का स्वतंत्रता दिवस कब मनाया जाता है?", opts: ["26 जनवरी", "15 अगस्त", "2 अक्टूबर", "1 मई"], ans: "15 अगस्त" },
+  { q: "भारत के पहले प्रधानमंत्री कौन थे?", opts: ["महात्मा गांधी", "जवाहरलाल नेहरू", "डॉ. राजेंद्र प्रसाद", "सरदार पटेल"], ans: "जवाहरलाल नेहरू" },
+  { q: "भारत का राष्ट्रीय ध्वज किसने डिज़ाइन किया था?", opts: ["पिंगली वेंकैया", "रवींद्रनाथ टैगोर", "बी.आर. अंबेडकर", "लाला लाजपत राय"], ans: "पिंगली वेंकैया" },
+  { q: "भारत का राष्ट्रीय पशु कौन सा है?", opts: ["हाथी", "शेर", "बाघ", "मोर"], ans: "बाघ" },
+  { q: "स्वतंत्र भारत के पहले राष्ट्रपति कौन थे?", opts: ["डॉ. राजेंद्र प्रसाद", "जवाहरलाल नेहरू", "सरदार पटेल", "डॉ. एस. राधाकृष्णन"], ans: "डॉ. राजेंद्र प्रसाद" },
+  { q: "भारत का राष्ट्रीय गान किसने लिखा?", opts: ["बंकिम चंद्र चट्टोपाध्याय", "रवींद्रनाथ टैगोर", "सुभाष चंद्र बोस", "महात्मा गांधी"], ans: "रवींद्रनाथ टैगोर" },
+  { q: "भारत में कुल कितने राज्य हैं?", opts: ["28", "29", "27", "30"], ans: "28" },
+  { q: "भारत का राष्ट्रीय फल कौन सा है?", opts: ["आम", "केला", "सेब", "अंगूर"], ans: "आम" },
+  { q: "भारत का राष्ट्रीय पक्षी कौन सा है?", opts: ["तोता", "मोर", "कबूतर", "कोयल"], ans: "मोर" },
+  { q: "भारत का राष्ट्रीय खेल कौन सा है?", opts: ["हॉकी", "क्रिकेट", "कबड्डी", "फुटबॉल"], ans: "हॉकी" },
+  { q: "भारत का सबसे ऊँचा पर्वत कौन सा है?", opts: ["कंचनजंगा", "एवरेस्ट", "नंदा देवी", "धौलागिरी"], ans: "कंचनजंगा" },
+  { q: "महात्मा गांधी का जन्म कब हुआ?", opts: ["2 अक्टूबर 1869", "15 अगस्त 1947", "26 जनवरी 1950", "14 नवंबर 1889"], ans: "2 अक्टूबर 1869" },
+  { q: "भारत की राजधानी क्या है?", opts: ["मुंबई", "दिल्ली", "कोलकाता", "चेन्नई"], ans: "दिल्ली" },
+  { q: "भारत का राष्ट्रीय वृक्ष कौन सा है?", opts: ["नीम", "पीपल", "बरगद", "आम"], ans: "बरगद" },
+  { q: "भारत का राष्ट्रीय गीत कौन सा है?", opts: ["जन गण मन", "वंदे मातरम्", "सारे जहाँ से अच्छा", "माँ तुझे सलाम"], ans: "वंदे मातरम्" }
+];
+
+quizData.sort(() => Math.random() - 0.5);
+
+let currentQuestion = 0;
+let score = 0;
+
+const quizContainer = document.getElementById("quiz");
+const nextBtn = document.getElementById("nextBtn");
+const resultDiv = document.getElementById("result");
+
+function loadQuestion() {
+  const q = quizData[currentQuestion];
+  quizContainer.innerHTML = `
+    <div class="question">${currentQuestion + 1}. ${q.q}</div>
+    <div class="options">
+      ${q.opts.map(opt => `
+        <label>
+          <input type="radio" name="answer" value="${opt}"> ${opt}
+        </label>
+      `).join("")}
+    </div>
+  `;
+  nextBtn.style.display = "none";
+}
+
+quizContainer.addEventListener("change", (e) => {
+  const selected = e.target.value;
+  const labels = document.querySelectorAll(".options label");
+
+  // Disable all options after selecting
+  document.querySelectorAll("input[name='answer']").forEach(input => input.disabled = true);
+
+  labels.forEach(label => {
+    const input = label.querySelector("input");
+    if (input.value === quizData[currentQuestion].ans) {
+      label.classList.add("correct");
+    } 
+    if (input.value === selected && selected !== quizData[currentQuestion].ans) {
+      label.classList.add("wrong");
+    }
+  });
+
+  if (selected === quizData[currentQuestion].ans) {
+    score++;
+  }
+
+  nextBtn.style.display = "inline-block";
+});
+
+nextBtn.addEventListener("click", () => {
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    loadQuestion();
+  } else {
+    quizContainer.style.display = "none";
+    nextBtn.style.display = "none";
+    resultDiv.innerHTML = `
+      आपका स्कोर: ${score} / ${quizData.length} <br>
+      <button onclick="restartQuiz()">Restart</button>
+    `;
+  }
+});
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  quizData.sort(() => Math.random() - 0.5);
+  quizContainer.style.display = "block";
+  nextBtn.style.display = "none";
+  resultDiv.innerHTML = "";
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
