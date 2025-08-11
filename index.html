@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Independence Day Celebration</title>
+<style>
+  body {
+    
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    text-align: center;
+   background:#fff5e1;
+  }
+  @keyframes smoothTricolor {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  header {
+    padding: 20px 10px;
+    background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+    background-size: 200% 200%;
+    animation: smoothTricolor 7s ease infinite;
+  }
+  header h1 {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+  }
+  header p {
+    font-size: 1.1rem;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 10px;
+  }
+  .card {
+    background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+    background-size: 150% 150%;
+    animation: smoothTricolor 10s ease infinite;
+    border-radius: 12px;
+    padding: 15px;
+    width: 240px;
+    color: #222;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+  .emoji {
+    font-size: 1.8rem;
+  }
+  h2 {
+    margin: 8px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1.0rem;
+    line-height: 1.3;
+  }
+  footer {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px;
+    font-size: 0.85rem;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🇮🇳 Independence Day Celebration</h1>
+  <p>तिरंगे के रंगों में अपनी यादें और जोश साझा करें</p>
+</header>
+
+<main>
+  <a href="quiz.html" class="card">
+    <div class="emoji">🧠</div>
+    <h2>देशभक्ति Quiz</h2>
+    <p>भारत के बारे में अपना ज्ञान परखें और मज़ेदार तथ्य जानें।</p>
+  </a>
+  
+  <a href="upload.html" class="card">
+    <div class="emoji">📸</div>
+    <h2>तिरंगे के साथ अपनी यादें</h2>
+    <p>फोटो/वीडियो अपलोड करें और दिखाएँ आपका जज़्बा।</p>
+  </a>
+  
+  <a href="about.html" class="card">
+    <div class="emoji">👤</div>
+    <h2>About Me</h2>
+  
+  </a>
+</main>
+
+
+</body>
+</html>
